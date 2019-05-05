@@ -7,4 +7,9 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 $output = curl_exec($ch);
 curl_close($ch);
 
-var_dump($output);
+if ($output === 'Hello World') {
+    echo 'OK';
+    exit(0);
+} else {
+    exit(1);
+}
