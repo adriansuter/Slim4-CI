@@ -8,7 +8,6 @@ $output = curl_exec($ch);
 curl_close($ch);
 
 if ($output === 'Hello world!') {
-    echo 'OK';
     exit(0);
 } else {
     var_dump($output);

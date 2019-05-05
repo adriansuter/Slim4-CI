@@ -1,14 +1,15 @@
 {
-    "name": "adriansuter/slim4-ci",
-    "type": "project",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Adrian Suter",
-            "email": "adrian@suter-wirz.ch"
-        }
-    ],
-    "require": {
-        "slim/slim": "4.0.0-alpha"
+  "name": "adriansuter/slim4-ci",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Adrian Suter",
+      "email": "adrian@suter-wirz.ch"
     }
+  ],
+  "require": {
+    "ext-curl": "*",
+    "slim/slim": "4.0.0-alpha"
+  }
 }
