@@ -7,7 +7,7 @@ matrix:
     - php: "7.1.28"
       env: COMPOSER_PSR7=slim/psr7
     - php: "7.1.28"
-      env: COMPOSER_PSR7=nyholm/psr-7 nyholm/psr7-server
+      env: COMPOSER_PSR7=nyholm/psr7 nyholm/psr7-server
 
 before_install:
   - sudo apt-get update > /dev/null
