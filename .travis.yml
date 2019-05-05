@@ -2,15 +2,19 @@ language: php
 
 sudo: false
 
-php:
-  - "7.2"
+matrix:
+  include:
+    - php: "7.1.28"
+      env: COMPOSER_PSR7=slim/psr7
+    - php: "7.1.28"
+      env: COMPOSER_PSR7=nyholm/psr-7 nyholm/psr7-server
 
 before_install:
   - sudo apt-get update > /dev/null
 
 install:
   - travis_retry composer update --prefer-dist --no-interaction
-  - travis_retry composer require slim/psr7
+  - travis_retry composer require $COMPOSER_PSR7
 
 before_script:
   - sudo apt-get install apache2 libapache2-mod-fastcgi
