@@ -2,7 +2,7 @@
 
 This repository would automatically try to run a simple [Slim4](https://github.com/slimphp/Slim) 
 application using four different PSR-7 implementations. To do that, it uses the 
-travis-ci system.
+Travis-CI system.
 
 ## Status
 
@@ -13,12 +13,17 @@ travis-ci system.
 | 3   | Guzzle              | [![Guzzle](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/3)](https://travis-ci.org/php-http/psr7-integration-tests) |
 | 4   | Zend                | [![Zend](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/4)](https://travis-ci.org/php-http/psr7-integration-tests)   |
 
+*Note: The Travis-CI is configured to be triggered automatically every 24 hours.*
+
 ## Explanation
 
-When triggered, travis creates four different virtual machines that install
-apache, this application and then load via composer the corresponding PSR-7
-implementations. Eventually the test would be a php-script that requests
-urls from the server and verifies its responses.
+When triggered, travis creates four different virtual machines. Each installs
+an Apache web server and this application. The web server is configured such
+that http://localhost/ points to the subdirectory `public`. Then each virtual 
+machine would require via composer a different PSR-7 implementation.
+
+Eventually the PHPUnit test is launched which would use the Guzzle HTTP
+Client to make http requests and validate the responses.
 
 ## Files
 
@@ -33,7 +38,7 @@ urls from the server and verifies its responses.
 - `build/travis-ci-apache` The apache configuration.
 - `.travis.yml` The travis configuration.
 
-**"Tests"**
+**Tests**
 
-- `tests/test.php` The tests. This file, called by travis, would make server 
-  requests and test if the responses are correct. 
+- `tests/bootstrap.php` The tests bootstrap.
+- `tests/*Test.php` The PHPUnit test classes.
