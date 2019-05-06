@@ -35,4 +35,4 @@ before_script:
   - sudo service apache2 restart
 
 script:
-  - php tests/test.php
+  - vendor/bin/phpunit
