@@ -18,4 +18,10 @@ $app->get('/hello/{name}', function (Request $request, Response $response, $args
     return $response;
 });
 
+$app->get('/status-202', function (Request $request, Response $response, $args) {
+    $response = $response->withStatus(202);
+    $response->getBody()->write('Status 202');
+    return $response;
+});
+
 $app->run();
