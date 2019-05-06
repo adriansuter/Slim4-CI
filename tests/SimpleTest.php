@@ -12,9 +12,18 @@ class SimpleTest extends TestCase
     public function testGetRoot()
     {
         $client = new Client();
-        $response = $client->request('GET', 'http://localhost');
+        $response = $client->request('GET', 'http://localhost/');
 
         $this->assertEquals('Hello world!', $response->getBody()->getContents());
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    public function testPlaceholder()
+    {
+        $client = new Client();
+        $response = $client->request('GET', 'http://localhost/hello/slim');
+
+        $this->assertEquals('Hello slim!', $response->getBody()->getContents());
         $this->assertEquals(200, $response->getStatusCode());
     }
 }

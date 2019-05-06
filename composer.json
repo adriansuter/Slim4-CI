@@ -9,7 +9,6 @@
     }
   ],
   "require": {
-    "ext-curl": "*",
     "slim/slim": "4.0.0-alpha"
   },
   "require-dev": {
