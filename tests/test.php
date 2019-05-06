@@ -1,5 +1,8 @@
 <?php
-
+///
+/// DEPRECATED
+///
+/*
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "http://localhost/");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -13,3 +16,4 @@ if ($output === 'Hello world!') {
     var_dump($output);
     exit(1);
 }
+*/
