@@ -5,20 +5,23 @@ sudo: false
 matrix:
   include:
     - php: "7.1.28"
-      env: COMPOSER_PSR7="slim/psr7"
+      env: PSR7="Slim"
     - php: "7.1.28"
-      env: COMPOSER_PSR7="nyholm/psr7 nyholm/psr7-server"
+      env: PSR7="Nyholm"
     - php: "7.1.28"
-      env: COMPOSER_PSR7="guzzlehttp/psr7 http-interop/http-factory-guzzle"
+      env: PSR7="Guzzle"
     - php: "7.1.28"
-      env: COMPOSER_PSR7="zendframework/zend-diactoros"
+      env: PSR7="Zend"
 
 before_install:
   - sudo apt-get update > /dev/null
 
 install:
   - travis_retry composer update --prefer-dist --no-interaction
-  - travis_retry composer require $COMPOSER_PSR7
+  - if [[ "$PSR7" == 'Slim'   ]]; then travis_retry composer require slim/psr7 ; fi
+  - if [[ "$PSR7" == 'Nyholm' ]]; then travis_retry composer require nyholm/psr7 nyholm/psr7-server ; fi
+  - if [[ "$PSR7" == 'Guzzle' ]]; then travis_retry composer require guzzlehttp/psr7 http-interop/http-factory-guzzle ; fi
+  - if [[ "$PSR7" == 'Zend'   ]]; then travis_retry composer require zendframework/zend-diactoros ; fi
 
 before_script:
   - sudo apt-get install apache2 libapache2-mod-fastcgi

@@ -21,18 +21,14 @@ class SimpleTest extends TestCase
     public function testGetPsr7()
     {
         $expectedBodyContents = [
-            'slim/psr7'
-            => 'Slim\Psr7\Request, Slim\Psr7\Response',
-            'nyholm/psr7 nyholm/psr7-server'
-            => 'Nyholm\Psr7\ServerRequest, Nyholm\Psr7\Response',
-            'guzzlehttp/psr7 http-interop/http-factory-guzzle'
-            => 'GuzzleHttp\Psr7\ServerRequest, GuzzleHttp\Psr7\Response',
-            'zendframework/zend-diactoros'
-            => 'Zend\Diactoros\ServerRequest, Zend\Diactoros\Response',
+            'Slim' => 'Slim\Psr7\Request, Slim\Psr7\Response',
+            'Nyholm' => 'Nyholm\Psr7\ServerRequest, Nyholm\Psr7\Response',
+            'Guzzle' => 'GuzzleHttp\Psr7\ServerRequest, GuzzleHttp\Psr7\Response',
+            'Zend' => 'Zend\Diactoros\ServerRequest, Zend\Diactoros\Response',
         ];
 
-        $composerPsr7 = getenv('COMPOSER_PSR7');
-        if ($composerPsr7 === false || !isset($expectedBodyContents[$composerPsr7])) {
+        $psr7 = getenv('PSR7');
+        if ($psr7 === false || !isset($expectedBodyContents[$psr7])) {
             $this->markTestSkipped();
             return;
         }
@@ -41,7 +37,7 @@ class SimpleTest extends TestCase
         $response = $client->request('GET', 'http://localhost/psr-7');
 
         $this->assertEquals(
-            $expectedBodyContents[$composerPsr7],
+            $expectedBodyContents[$psr7],
             $response->getBody()->getContents()
         );
     }
