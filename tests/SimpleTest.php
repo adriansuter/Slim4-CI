@@ -18,6 +18,34 @@ class SimpleTest extends TestCase
         $this->assertEquals('Hello world!', $response->getBody()->getContents());
     }
 
+    public function testGetPsr7()
+    {
+        $expectedBodyContents = [
+            'slim/psr7'
+            => 'Slim\Psr7\Request, Slim\Psr7\Response',
+            'nyholm/psr7 nyholm/psr7-server'
+            => 'Nyholm\Psr7\ServerRequest, Nyholm\Psr7\Response',
+            'guzzlehttp/psr7 http-interop/http-factory-guzzle'
+            => 'GuzzleHttp\Psr7\ServerRequest, GuzzleHttp\Psr7\Response',
+            'zendframework/zend-diactoros'
+            => 'Zend\Diactoros\ServerRequest, Zend\Diactoros\Response',
+        ];
+        
+        $composerPsr7 = getenv('COMPOSER_PSR7');
+        if ($composerPsr7 === false || !isset($expectedBodyContents[$composerPsr7])) {
+            $this->markTestSkipped();
+            return;
+        }
+
+        $client = new Client();
+        $response = $client->request('GET', 'http://localhost/psr-7');
+
+        $this->assertEquals(
+            $expectedBodyContents[$composerPsr7],
+            $response->getBody()->getContents()
+        );
+    }
+
     public function testGetPlaceholder()
     {
         $client = new Client();

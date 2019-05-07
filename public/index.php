@@ -13,6 +13,13 @@ $app->get('/', function (Request $request, Response $response, $args) {
     return $response;
 });
 
+$app->get('/psr-7', function (Request $request, Response $response, $args) use ($app) {
+    $response->getBody()->write(
+        get_class($request) . ', ' . get_class($response)
+    );
+    return $response;
+});
+
 $app->get('/hello/{name}', function (Request $request, Response $response, $args) {
     $response->getBody()->write('Hello ' . $args['name'] . '!');
     return $response;
