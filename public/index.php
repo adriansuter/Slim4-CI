@@ -47,6 +47,31 @@ $app->get('/status-reason-phrase', function (Request $request, Response $respons
     return $response;
 });
 
+$app->get('/request-target', function (Request $request, Response $response, $args) {
+    $response->getBody()->write($request->getRequestTarget());
+    return $response;
+});
+
+$app->get('/method', function (Request $request, Response $response, $args) {
+    $response->getBody()->write($request->getMethod());
+    return $response;
+});
+
+$app->get('/uri', function (Request $request, Response $response, $args) {
+    $uri = $request->getUri();
+    $response->getBody()->write(
+        $uri->getScheme() . ', '
+        . $uri->getAuthority() . ', '
+        . $uri->getHost() . ', '
+        . $uri->getPort() . ', '
+        . $uri->getPath() . ', '
+        . $uri->getFragment() . ', '
+        . $uri->getQuery() . ', '
+        . $uri->getUserInfo()
+    );
+    return $response;
+});
+
 $app->get('/redirect', function (Request $request, Response $response, $args) {
     return $response
         ->withHeader('Location', '/redirected')

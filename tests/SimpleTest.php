@@ -88,6 +88,33 @@ class SimpleTest extends TestCase
         $this->assertEquals('Status 299 - Peace', $response->getBody()->getContents());
     }
 
+    public function testGetRequestTarget()
+    {
+        $client = new Client();
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $response = $client->request('GET', 'http://localhost/request-target');
+
+        $this->assertEquals('/request-target', $response->getBody()->getContents());
+    }
+
+    public function testGetMethod()
+    {
+        $client = new Client();
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $response = $client->request('GET', 'http://localhost/method');
+
+        $this->assertEquals('GET', $response->getBody()->getContents());
+    }
+
+    public function testGetUri()
+    {
+        $client = new Client();
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $response = $client->request('GET', 'http://localhost/uri?foo=bar#section');
+
+        $this->assertEquals('http, localhost, localhost, , /uri, , foo=bar, ', $response->getBody()->getContents());
+    }
+
     public function testGetRedirect()
     {
         $client = new Client();
