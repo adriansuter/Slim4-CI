@@ -9,6 +9,7 @@
     }
   ],
   "require": {
+    "ext-json": "*",
     "slim/slim": "4.0.0-alpha"
   },
   "require-dev": {
