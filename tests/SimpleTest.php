@@ -30,7 +30,7 @@ class SimpleTest extends TestCase
             'zendframework/zend-diactoros'
             => 'Zend\Diactoros\ServerRequest, Zend\Diactoros\Response',
         ];
-        
+
         $composerPsr7 = getenv('COMPOSER_PSR7');
         if ($composerPsr7 === false || !isset($expectedBodyContents[$composerPsr7])) {
             $this->markTestSkipped();
@@ -109,5 +109,22 @@ class SimpleTest extends TestCase
         ]);
 
         $this->assertEquals('{"foo":"bar","multi":["9","8"]}', $response->getBody()->getContents());
+    }
+
+    public function testPostFileUpload()
+    {
+        $client = new Client();
+        $response = $client->request('POST', 'http://localhost/upload-file', [
+            'multipart' => [
+                [
+                    'name' => 'upload',
+                    'filename' => 'plain.txt',
+                    'contents' => fopen(__DIR__ . '/assets/plain.txt', 'r')
+                ],
+            ],
+        ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('plain.txt, 8', $response->getBody()->getContents());
     }
 }

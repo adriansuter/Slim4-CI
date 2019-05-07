@@ -2,6 +2,7 @@
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\UploadedFileInterface;
 use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -61,6 +62,17 @@ $app->post('/form-data', function (Request $request, Response $response, $args) 
     $response->getBody()->write(
         json_encode($request->getParsedBody(), JSON_UNESCAPED_UNICODE)
     );
+    return $response;
+});
+
+$app->post('/upload-file', function (Request $request, Response $response, $args) {
+    /** @var UploadedFileInterface[] $uploadedFiles */
+    $uploadedFiles = $request->getUploadedFiles();
+    foreach ($uploadedFiles as $uploadedFile) {
+        $response->getBody()->write(
+            $uploadedFile->getClientFilename() . ', ' . $uploadedFile->getSize()
+        );
+    }
     return $response;
 });
 
