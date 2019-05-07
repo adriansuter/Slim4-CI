@@ -40,7 +40,7 @@ Client to make http requests and validate the responses.
 
 **Travis-CI**
 
-- `build/travis-ci-apache` The apache configuration.
+- `build/travis-ci-apache.conf` The apache configuration.
 - `.travis.yml` The travis configuration.
 
 **Tests**
