@@ -12,6 +12,7 @@ class SimpleTest extends TestCase
     public function testGet()
     {
         $client = new Client();
+        /** @noinspection PhpUnhandledExceptionInspection */
         $response = $client->request('GET', 'http://localhost/');
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -34,6 +35,7 @@ class SimpleTest extends TestCase
         }
 
         $client = new Client();
+        /** @noinspection PhpUnhandledExceptionInspection */
         $response = $client->request('GET', 'http://localhost/psr-7');
 
         $this->assertEquals(
@@ -45,6 +47,7 @@ class SimpleTest extends TestCase
     public function testGetPlaceholder()
     {
         $client = new Client();
+        /** @noinspection PhpUnhandledExceptionInspection */
         $response = $client->request('GET', 'http://localhost/hello/slim');
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -54,6 +57,7 @@ class SimpleTest extends TestCase
     public function testGetQueryParams()
     {
         $client = new Client();
+        /** @noinspection PhpUnhandledExceptionInspection */
         $response = $client->request('GET', 'http://localhost/query-params', [
             'query' => ['foo' => 'bar', 'white space' => 'hello world']
         ]);
@@ -65,6 +69,7 @@ class SimpleTest extends TestCase
     public function testGetWithStatus()
     {
         $client = new Client();
+        /** @noinspection PhpUnhandledExceptionInspection */
         $response = $client->request('GET', 'http://localhost/status-202');
 
         $this->assertEquals(202, $response->getStatusCode());
@@ -75,6 +80,7 @@ class SimpleTest extends TestCase
     public function testGetWithStatusAndReasonPhrase()
     {
         $client = new Client();
+        /** @noinspection PhpUnhandledExceptionInspection */
         $response = $client->request('GET', 'http://localhost/status-reason-phrase');
 
         $this->assertEquals(299, $response->getStatusCode());
@@ -85,6 +91,7 @@ class SimpleTest extends TestCase
     public function testGetRedirect()
     {
         $client = new Client();
+        /** @noinspection PhpUnhandledExceptionInspection */
         $response = $client->request('GET', 'http://localhost/redirect');
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -94,6 +101,7 @@ class SimpleTest extends TestCase
     public function testPostFormData()
     {
         $client = new Client();
+        /** @noinspection PhpUnhandledExceptionInspection */
         $response = $client->request('POST', 'http://localhost/form-data', [
             'form_params' => [
                 'foo' => 'bar',
@@ -110,6 +118,7 @@ class SimpleTest extends TestCase
     public function testPostFileUpload()
     {
         $client = new Client();
+        /** @noinspection PhpUnhandledExceptionInspection */
         $response = $client->request('POST', 'http://localhost/upload-file', [
             'multipart' => [
                 [
