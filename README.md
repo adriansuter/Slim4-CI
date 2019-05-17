@@ -59,7 +59,7 @@ Help in form of issues or pull requests would be very much welcomed.
   ```bash
   $ composer install
   ```
-- Decide which PSR7-implementation you would like to use during development and 
+- Decide which PSR-7 implementation you would like to use during development and 
   install it using composer. **Note that this would modify `composer.json` and 
   therefore you must make sure that you do not commit those changes.**
   - Slim  
