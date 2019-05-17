@@ -30,7 +30,7 @@ Eventually the PHPUnit test is launched which would use the Guzzle HTTP
 Client to make http requests and validate the responses.
 
 
-## Files
+### Files
 
 **Web Application**
 
@@ -47,3 +47,43 @@ Client to make http requests and validate the responses.
 
 - `tests/bootstrap.php` The tests bootstrap.
 - `tests/*Test.php` The PHPUnit test classes.
+
+
+## Development
+
+Help in form of issues or pull requests would be very much welcomed.
+
+- Clone your fork of this repository.
+- Create a new branch for every patch, feature or improvement.
+- Install the required libraries.
+  ```bash
+  $ composer install
+  ```
+- Decide which PSR7-implementation you would like to use during development and 
+  install it using composer. **Note that this would modify `composer.json` and 
+  therefore you must make sure that you do not commit those changes.**
+  - Slim  
+    ```bash
+    $ composer require slim/psr7
+    ```
+  - Nyholm
+    ```bash
+    $ composer require nyholm/psr7 nyholm/psr7-server
+    ```
+  - Guzzle
+    ```bash
+    $ composer require guzzlehttp/psr7 http-interop/http-factory-guzzle
+    ```
+  - Zend
+    ```bash
+    $ composer require zendframework/zend-diactoros
+    ```
+- Install a web server, make sure that `localhost` points to the `public/` 
+  subdirectory and start the web server.
+- Run the tests
+  ```bash
+  $ vendor/bin/phpunit
+  ```
+
+By default you will get 1 skipped test. That test works only, if the environment 
+variable `PSR7` is set to either `Slim`, `Nyholm`, `Guzzle` or `Zend`.
