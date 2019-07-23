@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUnusedParameterInspection */
 /**
  * Slim4 CI (https://github.com/adriansuter/Slim4-CI)
  *
