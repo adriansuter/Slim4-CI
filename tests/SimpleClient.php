@@ -125,10 +125,6 @@ class SimpleClient
         $response = new SimpleResponse();
 
         $curl = $this->curlInit($url, $response);
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
-        curl_setopt($curl, CURLOPT_UPLOAD, true);
-        curl_setopt($curl, CURLOPT_READFUNCTION, [$multipart, 'curl_read']);
-        curl_setopt($curl, CURLOPT_BUFFERSIZE, 512);
 
         $headers = ['Content-Type: ' . $multipart->getContentType()];
         $contentLength = $multipart->getContentLength();
@@ -136,6 +132,11 @@ class SimpleClient
             $headers[] = 'Content-Length: ' . $contentLength;
         }
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $multipart->buffer(
+            $multipart->getContentLength()
+        ));
 
         return $this->curlExec($curl, $response);
     }
