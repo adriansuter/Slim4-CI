@@ -137,11 +137,14 @@ class SimpleTest extends TestCase
         $client = new SimpleClient();
 
         $multipart = new MultipartFormData();
+
+        $file = __DIR__ . '/assets/plain.txt';
         $multipart->addFile(
             'upload',
             'plain.txt',
-            file_get_contents(__DIR__ . '/assets/plain.txt'),
-            'text/plain'
+            fopen($file, 'r'),
+            'text/plain',
+            filesize($file)
         );
 
         $response = $client->postMultipart('http://localhost/upload-file', $multipart);
