@@ -4,13 +4,13 @@ sudo: false
 
 matrix:
   include:
-    - php: "7.1.29"
+    - php: "7.1.30"
       env: PSR7="Slim"
-    - php: "7.1.29"
+    - php: "7.1.30"
       env: PSR7="Nyholm"
-    - php: "7.1.29"
+    - php: "7.1.30"
       env: PSR7="Guzzle"
-    - php: "7.1.29"
+    - php: "7.1.30"
       env: PSR7="Zend"
 
 before_install:
