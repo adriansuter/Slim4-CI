@@ -128,6 +128,7 @@ class SimpleClient
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($curl, CURLOPT_UPLOAD, true);
         curl_setopt($curl, CURLOPT_READFUNCTION, [$multipart, 'curl_read']);
+        curl_setopt($curl, CURLOPT_BUFFERSIZE, 512);
 
         $headers = ['Content-Type: ' . $multipart->getContentType()];
         $contentLength = $multipart->getContentLength();
