@@ -10,7 +10,7 @@
   ],
   "require": {
     "ext-json": "*",
-    "slim/slim": "^4.0.0"
+    "slim/slim": "^4.0"
   },
   "require-dev": {
     "ext-curl": "*",
