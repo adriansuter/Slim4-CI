@@ -2,22 +2,32 @@ language: php
 
 sudo: false
 
+php:
+  - "7.1.30"
+
+env:
+  - PSR7="Slim"
+  - PSR7="Nyholm"
+  - PSR7="Guzzle"
+  - PSR7="Zend"
+  - SLIM_DEV=true PSR7="Slim"
+  - SLIM_DEV=true PSR7="Nyholm"
+  - SLIM_DEV=true PSR7="Guzzle"
+  - SLIM_DEV=true PSR7="Zend"
+
 matrix:
-  include:
-    - php: "7.1.30"
-      env: PSR7="Slim"
-    - php: "7.1.30"
-      env: PSR7="Nyholm"
-    - php: "7.1.30"
-      env: PSR7="Guzzle"
-    - php: "7.1.30"
-      env: PSR7="Zend"
+  allow_failures:
+    - env: SLIM_DEV=true PSR7="Slim"
+    - env: SLIM_DEV=true PSR7="Nyholm"
+    - env: SLIM_DEV=true PSR7="Guzzle"
+    - env: SLIM_DEV=true PSR7="Zend"
 
 before_install:
   - sudo apt-get update > /dev/null
 
 install:
   - travis_retry composer update --prefer-dist --no-interaction
+  - if [[ "$SLIM_DEV" ]]; then travis_retry composer require slim/slim:4.x-dev ; fi
   - if [[ "$PSR7" == 'Slim'   ]]; then travis_retry composer require slim/psr7 ; fi
   - if [[ "$PSR7" == 'Nyholm' ]]; then travis_retry composer require nyholm/psr7 nyholm/psr7-server ; fi
   - if [[ "$PSR7" == 'Guzzle' ]]; then travis_retry composer require guzzlehttp/psr7 http-interop/http-factory-guzzle ; fi

@@ -9,12 +9,25 @@ framework.
 
 ## Status
 
-| #   | PSR-7 Implementation | Status         |
-| --- | -------------------- | -------------- |
-| 1   | Slim PSR-7           | [![Slim](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/1)](https://travis-ci.org/adriansuter/Slim4-CI)              |
-| 2   | Nyholm               | [![Nyholm](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/2)](https://travis-ci.org/adriansuter/Slim4-CI)            |
-| 3   | Guzzle               | [![Guzzle](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/3)](https://travis-ci.org/php-http/psr7-integration-tests) |
-| 4   | Zend                 | [![Zend](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/4)](https://travis-ci.org/php-http/psr7-integration-tests)   |
+| #   | PSR-7 Implementation | Status                                                                                                                                           |
+| --- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | Slim PSR-7           | [![Slim](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/1)](https://travis-ci.org/adriansuter/Slim4-CI)   |
+| 2   | Nyholm               | [![Nyholm](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/2)](https://travis-ci.org/adriansuter/Slim4-CI) |
+| 3   | Guzzle               | [![Guzzle](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/3)](https://travis-ci.org/adriansuter/Slim4-CI) |
+| 4   | Zend                 | [![Zend](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/4)](https://travis-ci.org/adriansuter/Slim4-CI)   |
+
+*Note: Travis-CI is configured to be triggered automatically at least every 24 hours.*
+
+### Status using the development branch of Slim (4.x)
+
+The following status used the development branch of Slim (4.x) to test against.
+
+| #   | PSR-7 Implementation | Status                                                                                                                                           |
+| --- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 5   | Slim PSR-7           | [![Slim](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/5)](https://travis-ci.org/adriansuter/Slim4-CI)   |
+| 6   | Nyholm               | [![Nyholm](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/6)](https://travis-ci.org/adriansuter/Slim4-CI) |
+| 7   | Guzzle               | [![Guzzle](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/7)](https://travis-ci.org/adriansuter/Slim4-CI) |
+| 8   | Zend                 | [![Zend](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/8)](https://travis-ci.org/adriansuter/Slim4-CI)   |
 
 *Note: Travis-CI is configured to be triggered automatically at least every 24 hours.*
 
