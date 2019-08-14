@@ -12,11 +12,15 @@ env:
   - PSR7="Zend"
   - SLIM_DEV=true PSR7="Slim"
   - SLIM_DEV=true PSR7="Nyholm"
+  - SLIM_DEV=true PSR7="Guzzle"
+  - SLIM_DEV=true PSR7="Zend"
 
 matrix:
   allow_failures:
     - env: SLIM_DEV=true PSR7="Slim"
     - env: SLIM_DEV=true PSR7="Nyholm"
+    - env: SLIM_DEV=true PSR7="Guzzle"
+    - env: SLIM_DEV=true PSR7="Zend"
 
 before_install:
   - sudo apt-get update > /dev/null
