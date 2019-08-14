@@ -10,11 +10,13 @@ env:
   - PSR7="Nyholm"
   - PSR7="Guzzle"
   - PSR7="Zend"
-  - PSR7="Slim" SLIM_DEV=true
+  - SLIM_DEV=true PSR7="Slim"
+  - SLIM_DEV=true PSR7="Nyholm"
 
-allow_failures:
-  - php: "7.1.30"
-    env: PSR7="Slim" SLIM_DEV=true
+matrix:
+  allow_failures:
+    - env: SLIM_DEV=true PSR7="Slim"
+    - env: SLIM_DEV=true PSR7="Nyholm"
 
 before_install:
   - sudo apt-get update > /dev/null
