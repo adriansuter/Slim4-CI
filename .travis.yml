@@ -2,20 +2,19 @@ language: php
 
 sudo: false
 
-env:
+php:
+  - "7.1.30"
 
-matrix:
-  include:
-    - php: "7.1.30"
-      env: PSR7="Slim"
-    - php: "7.1.30"
-      env: PSR7="Nyholm"
-    - php: "7.1.30"
-      env: PSR7="Guzzle"
-    - php: "7.1.30"
-      env: PSR7="Zend"
-    - php: "7.1.30"
-      env: PSR7="Slim" SLIM_DEV=true
+env:
+  - PSR7="Slim"
+  - PSR7="Nyholm"
+  - PSR7="Guzzle"
+  - PSR7="Zend"
+  - PSR7="Slim" SLIM_DEV=true
+
+allow_failures:
+  - php: "7.1.30"
+    env: PSR7="Slim" SLIM_DEV=true
 
 before_install:
   - sudo apt-get update > /dev/null
