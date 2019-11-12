@@ -95,6 +95,22 @@ class SimpleClient
 
     /**
      * @param string $url
+     * @param string $cookieValue
+     *
+     * @return SimpleResponse
+     */
+    public function getWithCookie(string $url, string $cookieValue): SimpleResponse
+    {
+        $response = new SimpleResponse();
+
+        $curl = $this->curlInit($url, $response);
+        curl_setopt($curl, CURLOPT_COOKIE, $cookieValue);
+
+        return $this->curlExec($curl, $response);
+    }
+
+    /**
+     * @param string $url
      * @param array $params
      *
      * @return SimpleResponse

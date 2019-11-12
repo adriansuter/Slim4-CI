@@ -10,6 +10,7 @@ declare(strict_types=1);
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\UploadedFileInterface;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -106,6 +107,23 @@ $app->post('/upload-file', function (Request $request, Response $response, $args
         );
     }
     return $response;
+});
+
+$app->get('/cookie-params', function (Request $request, Response $response, array $args): Response {
+    $response->getBody()->write(
+        json_encode($request->getCookieParams(), JSON_UNESCAPED_UNICODE)
+    );
+    return $response;
+});
+
+$app->get('/attributes', function (Request $request, Response $response, array $args): Response {
+    $response->getBody()->write(
+        $request->getAttribute('framework')
+    );
+    return $response;
+})->add(function (Request $request, RequestHandler $handler): Response {
+    $request = $request->withAttribute('framework', 'slim');
+    return $handler->handle($request);
 });
 
 $app->run();

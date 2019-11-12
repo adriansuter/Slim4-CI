@@ -152,4 +152,25 @@ class SimpleTest extends TestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('plain.txt, 8', $response->getBody());
     }
+
+    public function testCookieParams()
+    {
+        $client = new SimpleClient();
+
+        $response = $client->getWithCookie('http://localhost/cookie-params', 'token=slim; session=foo-bar');
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('{"token":"slim","session":"foo-bar"}', $response->getBody());
+    }
+
+    public function testAttributes()
+    {
+        // The request handler on the server is using the following methods (which we test here):
+        // - `\Psr\Http\Message\ServerRequestInterface::withAttribute()`
+        // - `\Psr\Http\Message\ServerRequestInterface::getAttribute()`
+        $client = new SimpleClient();
+        $response = $client->get('http://localhost/attributes');
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('slim', $response->getBody());
+    }
 }
