@@ -162,6 +162,35 @@ class SimpleTest extends TestCase
         $this->assertEquals('{"token":"slim","session":"foo-bar"}', $response->getBody());
     }
 
+    // `\Psr\Http\Message\MessageInterface::withProtocolVersion()`
+    // `\Psr\Http\Message\MessageInterface::getProtocolVersion()`
+    public function testRequestProtocolVersion()
+    {
+        $client = new SimpleClient();
+        $response = $client->get('http://localhost/request/protocol-version');
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('1.0', $response->getBody());
+    }
+
+    // `\Psr\Http\Message\MessageInterface::getHeaders()`
+    // `\Psr\Http\Message\MessageInterface::hasHeader()`
+    // `\Psr\Http\Message\MessageInterface::getHeader()`
+    // `\Psr\Http\Message\MessageInterface::getHeaderLine()`
+    // `\Psr\Http\Message\MessageInterface::withHeader()`
+    // `\Psr\Http\Message\MessageInterface::withAddedHeader()`
+    // `\Psr\Http\Message\MessageInterface::withoutHeader()`
+    public function testRequestHeaders()
+    {
+        $client = new SimpleClient();
+        $response = $client->get('http://localhost/request/headers');
+
+        // TODO Add some headers into the request.
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('["1234"]["5678"]5678, 8765["5678","8765"]NO', $response->getBody());
+    }
+
     public function testAttributes()
     {
         // The request handler on the server is using the following methods (which we test here):

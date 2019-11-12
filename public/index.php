@@ -12,6 +12,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\UploadedFileInterface;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Factory\AppFactory;
+use Slim\Routing\RouteCollectorProxy;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -115,6 +116,49 @@ $app->get('/cookie-params', function (Request $request, Response $response, arra
     );
     return $response;
 });
+
+$app->group('/request', function (RouteCollectorProxy $group) {
+    $group->get('/protocol-version', function (Request $request, Response $response, array $args): Response {
+        $request = $request->withProtocolVersion('1.0');
+
+        $response->getBody()->write(
+            $request->getProtocolVersion()
+        );
+        return $response;
+    });
+
+    $group->get('/headers', function (Request $request, Response $response, array $args): Response {
+        $request = $request->withHeader('test', '1234');
+        $response->getBody()->write(
+            json_encode($request->getHeader('test'), JSON_UNESCAPED_UNICODE)
+        );
+
+        $request = $request->withHeader('test', '5678');
+        $response->getBody()->write(
+            json_encode($request->getHeader('test'), JSON_UNESCAPED_UNICODE)
+        );
+
+        $request = $request->withAddedHeader('test', '8765');
+        $response->getBody()->write(
+        /** @var Request $request */
+            $request->getHeaderLine('test')
+        );
+
+        $headers = $request->getHeaders();
+        $response->getBody()->write(
+            json_encode($headers['test'], JSON_UNESCAPED_UNICODE)
+        );
+
+        /** @var Request $request */
+        $request = $request->withoutHeader('test');
+        $response->getBody()->write(
+            $request->hasHeader('test') ? 'YES' : 'NO'
+        );
+
+        return $response;
+    });
+});
+
 
 $app->get('/attributes', function (Request $request, Response $response, array $args): Response {
     $response->getBody()->write(
