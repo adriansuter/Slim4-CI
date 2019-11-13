@@ -128,6 +128,11 @@ $app->group('/request', function (RouteCollectorProxy $group) {
     });
 
     $group->get('/headers', function (Request $request, Response $response, array $args): Response {
+        $response->getBody()->write(
+            $request->hasHeader('slim') ?
+                json_encode($request->getHeader('slim'), JSON_UNESCAPED_UNICODE) : '-'
+        );
+
         $request = $request->withHeader('test', '1234');
         $response->getBody()->write(
             json_encode($request->getHeader('test'), JSON_UNESCAPED_UNICODE)

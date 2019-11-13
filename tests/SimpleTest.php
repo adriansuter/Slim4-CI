@@ -16,7 +16,7 @@ class SimpleTest extends TestCase
 {
     public function testGet()
     {
-        $client = new SimpleClient();
+        $client = new SimpleRequestClient();
         $response = $client->get('http://localhost/');
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -38,7 +38,7 @@ class SimpleTest extends TestCase
             return;
         }
 
-        $client = new SimpleClient();
+        $client = new SimpleRequestClient();
         $response = $client->get('http://localhost/psr-7');
 
         $this->assertEquals(
@@ -49,7 +49,7 @@ class SimpleTest extends TestCase
 
     public function testGetPlaceholder()
     {
-        $client = new SimpleClient();
+        $client = new SimpleRequestClient();
         $response = $client->get('http://localhost/hello/slim');
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -58,7 +58,7 @@ class SimpleTest extends TestCase
 
     public function testGetQueryParams()
     {
-        $client = new SimpleClient();
+        $client = new SimpleRequestClient();
         $response = $client->get('http://localhost/query-params', ['foo' => 'bar', 'white space' => 'hello world']);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -67,7 +67,7 @@ class SimpleTest extends TestCase
 
     public function testGetWithStatus()
     {
-        $client = new SimpleClient();
+        $client = new SimpleRequestClient();
         $response = $client->get('http://localhost/status-202');
 
         $this->assertEquals(202, $response->getStatusCode());
@@ -77,7 +77,7 @@ class SimpleTest extends TestCase
 
     public function testGetWithStatusAndReasonPhrase()
     {
-        $client = new SimpleClient();
+        $client = new SimpleRequestClient();
         $response = $client->get('http://localhost/status-reason-phrase');
 
         $this->assertEquals(299, $response->getStatusCode());
@@ -87,7 +87,7 @@ class SimpleTest extends TestCase
 
     public function testGetRequestTarget()
     {
-        $client = new SimpleClient();
+        $client = new SimpleRequestClient();
         $response = $client->get('http://localhost/request-target');
 
         $this->assertEquals('/request-target', $response->getBody());
@@ -95,7 +95,7 @@ class SimpleTest extends TestCase
 
     public function testGetMethod()
     {
-        $client = new SimpleClient();
+        $client = new SimpleRequestClient();
         $response = $client->get('http://localhost/method');
 
         $this->assertEquals('GET', $response->getBody());
@@ -103,7 +103,7 @@ class SimpleTest extends TestCase
 
     public function testGetUri()
     {
-        $client = new SimpleClient();
+        $client = new SimpleRequestClient();
         $response = $client->get('http://localhost/uri?foo=bar#section');
 
         $this->assertEquals('http, localhost, localhost, , /uri, , foo=bar, ', $response->getBody());
@@ -111,7 +111,7 @@ class SimpleTest extends TestCase
 
     public function testGetRedirect()
     {
-        $client = new SimpleClient();
+        $client = new SimpleRequestClient();
         $response = $client->get('http://localhost/redirect');
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -120,7 +120,7 @@ class SimpleTest extends TestCase
 
     public function testPostFormData()
     {
-        $client = new SimpleClient();
+        $client = new SimpleRequestClient();
         $response = $client->post('http://localhost/form-data', [
             'foo' => 'bar',
             'multi' => [
@@ -134,7 +134,7 @@ class SimpleTest extends TestCase
 
     public function testPostFileUpload()
     {
-        $client = new SimpleClient();
+        $client = new SimpleRequestClient();
 
         $multipart = new MultipartFormData();
 
@@ -155,9 +155,10 @@ class SimpleTest extends TestCase
 
     public function testCookieParams()
     {
-        $client = new SimpleClient();
+        $requestClient = new SimpleRequestClient();
+        $requestClient->setCookies(['token' => 'slim', 'session' => 'foo-bar']);
 
-        $response = $client->getWithCookie('http://localhost/cookie-params', 'token=slim; session=foo-bar');
+        $response = $requestClient->get('http://localhost/cookie-params');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('{"token":"slim","session":"foo-bar"}', $response->getBody());
     }
@@ -166,7 +167,7 @@ class SimpleTest extends TestCase
     // `\Psr\Http\Message\MessageInterface::getProtocolVersion()`
     public function testRequestProtocolVersion()
     {
-        $client = new SimpleClient();
+        $client = new SimpleRequestClient();
         $response = $client->get('http://localhost/request/protocol-version');
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -182,13 +183,14 @@ class SimpleTest extends TestCase
     // `\Psr\Http\Message\MessageInterface::withoutHeader()`
     public function testRequestHeaders()
     {
-        $client = new SimpleClient();
-        $response = $client->get('http://localhost/request/headers');
-
-        // TODO Add some headers into the request.
+        $requestClient = new SimpleRequestClient();
+        $requestClient->setHeaders([
+            'slim: 9'
+        ]);
+        $response = $requestClient->get('http://localhost/request/headers');
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('["1234"]["5678"]5678,8765["5678","8765"]NO', $response->getBody());
+        $this->assertEquals('["9"]["1234"]["5678"]5678,8765["5678","8765"]NO', $response->getBody());
     }
 
     public function testAttributes()
@@ -196,7 +198,7 @@ class SimpleTest extends TestCase
         // The request handler on the server is using the following methods (which we test here):
         // - `\Psr\Http\Message\ServerRequestInterface::withAttribute()`
         // - `\Psr\Http\Message\ServerRequestInterface::getAttribute()`
-        $client = new SimpleClient();
+        $client = new SimpleRequestClient();
         $response = $client->get('http://localhost/attributes');
 
         $this->assertEquals(200, $response->getStatusCode());
