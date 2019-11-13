@@ -154,6 +154,8 @@ class SimpleRequestClient
     }
 
     /**
+     * Send a POST request containing multipart form data to the server
+     *
      * @param string $url
      * @param MultipartFormData $multipart
      *
@@ -165,16 +167,14 @@ class SimpleRequestClient
             $multipart->finish();
         }
 
-        $response = new SimpleResponse();
-
-        $curl = $this->curlInit($url, $response);
-
-        $headers = ['Content-Type: ' . $multipart->getContentType()];
+        array_push($this->headers, 'Content-Type: ' . $multipart->getContentType());
         $contentLength = $multipart->getContentLength();
         if ($contentLength >= 0) {
-            $headers[] = 'Content-Length: ' . $contentLength;
+            array_push($this->headers, 'Content-Length: ' . $contentLength);
         }
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+        $response = new SimpleResponse();
+        $curl = $this->curlInit($url, $response);
 
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $multipart->buffer(
