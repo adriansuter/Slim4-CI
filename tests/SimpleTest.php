@@ -204,6 +204,17 @@ class SimpleTest extends TestCase
         $this->assertEquals('foo=bar,test', $response->getBody());
     }
 
+    // `\Psr\Http\Message\RequestInterface::getRequestTarget()`
+    // `\Psr\Http\Message\RequestInterface::withRequestTarget()`
+    public function testRequestTarget()
+    {
+        $requestClient = new SimpleRequestClient();
+        $response = $requestClient->get('http://localhost/request/request-target');
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('/request/request-target,*', $response->getBody());
+    }
+
     public function testAttributes()
     {
         // The request handler on the server is using the following methods (which we test here):

@@ -179,6 +179,19 @@ $app->group('/request', function (RouteCollectorProxy $group) {
 
         return $response;
     });
+
+    $group->get('/request-target', function (Request $request, Response $response, array $args): Response {
+        $response->getBody()->write(
+            $request->getRequestTarget()
+        );
+
+        $request = $request->withRequestTarget('*');
+        $response->getBody()->write(
+            ',' . $request->getRequestTarget()
+        );
+
+        return $response;
+    });
 });
 
 
