@@ -57,28 +57,8 @@ $app->get('/status-reason-phrase', function (Request $request, Response $respons
     return $response;
 });
 
-$app->get('/request-target', function (Request $request, Response $response, $args) {
-    $response->getBody()->write($request->getRequestTarget());
-    return $response;
-});
-
 $app->get('/method', function (Request $request, Response $response, $args) {
     $response->getBody()->write($request->getMethod());
-    return $response;
-});
-
-$app->get('/uri', function (Request $request, Response $response, $args) {
-    $uri = $request->getUri();
-    $response->getBody()->write(
-        $uri->getScheme() . ', '
-        . $uri->getAuthority() . ', '
-        . $uri->getHost() . ', '
-        . $uri->getPort() . ', '
-        . $uri->getPath() . ', '
-        . $uri->getFragment() . ', '
-        . $uri->getQuery() . ', '
-        . $uri->getUserInfo()
-    );
     return $response;
 });
 
@@ -188,6 +168,43 @@ $app->group('/request', function (RouteCollectorProxy $group) {
         $request = $request->withRequestTarget('*');
         $response->getBody()->write(
             ',' . $request->getRequestTarget()
+        );
+
+        return $response;
+    });
+
+    $group->any('/method', function (Request $request, Response $response, array $args): Response {
+        $response->getBody()->write(
+            $request->getMethod()
+        );
+
+        $request = $request->withMethod('PUT');
+        $response->getBody()->write(
+            ',' . $request->getMethod()
+        );
+
+        return $response;
+    });
+
+    $group->get('/uri', function (Request $request, Response $response, array $args): Response {
+        $uri = $request->getUri();
+        $response->getBody()->write(
+            $uri->getScheme() . ', '
+            . $uri->getAuthority() . ', '
+            . $uri->getHost() . ', '
+            . $uri->getPort() . ', '
+            . $uri->getPath() . ', '
+            . $uri->getFragment() . ', '
+            . $uri->getQuery() . ', '
+            . $uri->getUserInfo()
+        );
+        return $response;
+    });
+
+    $group->get('/server-params', function (Request $request, Response $response, array $args): Response {
+        $serverParams = $request->getServerParams();
+        $response->getBody()->write(
+            isset($serverParams['REQUEST_SCHEME']) ? $serverParams['REQUEST_SCHEME'] : '-'
         );
 
         return $response;

@@ -85,28 +85,12 @@ class SimpleTest extends TestCase
         $this->assertEquals('Status 299 - Peace', $response->getBody());
     }
 
-    public function testGetRequestTarget()
-    {
-        $client = new SimpleRequestClient();
-        $response = $client->get('http://localhost/request-target');
-
-        $this->assertEquals('/request-target', $response->getBody());
-    }
-
     public function testGetMethod()
     {
         $client = new SimpleRequestClient();
         $response = $client->get('http://localhost/method');
 
         $this->assertEquals('GET', $response->getBody());
-    }
-
-    public function testGetUri()
-    {
-        $client = new SimpleRequestClient();
-        $response = $client->get('http://localhost/uri?foo=bar#section');
-
-        $this->assertEquals('http, localhost, localhost, , /uri, , foo=bar, ', $response->getBody());
     }
 
     public function testGetRedirect()
@@ -213,6 +197,47 @@ class SimpleTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('/request/request-target,*', $response->getBody());
+    }
+
+    public function testMethod()
+    {
+        // The request handler on the server is using the following methods (which we test here):
+        // `\Psr\Http\Message\RequestInterface::getMethod()`
+        // `\Psr\Http\Message\RequestInterface::withMethod()`
+        $requestClient = new SimpleRequestClient();
+        $response = $requestClient->get('http://localhost/request/method');
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('GET,PUT', $response->getBody());
+
+        $requestClient = new SimpleRequestClient();
+        $response = $requestClient->post('http://localhost/request/method');
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('POST,PUT', $response->getBody());
+    }
+
+    public function testUri()
+    {
+        // The request handler on the server is using the following methods (which we test here):
+        // `\Psr\Http\Message\RequestInterface::getUri()`
+        // `\Psr\Http\Message\RequestInterface::withUri()`
+        $client = new SimpleRequestClient();
+        $response = $client->get('http://localhost/request/uri?foo=bar#section');
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('http, localhost, localhost, , /request/uri, , foo=bar, ', $response->getBody());
+    }
+
+    public function testServerParams()
+    {
+        // The request handler on the server is using the following methods (which we test here):
+        // `\Psr\Http\Message\ServerRequestInterface::getServerParams()`
+        $client = new SimpleRequestClient();
+        $response = $client->get('http://localhost/request/server-params');
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('http', $response->getBody());
     }
 
     public function testAttributes()
