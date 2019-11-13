@@ -85,14 +85,6 @@ class SimpleTest extends TestCase
         $this->assertEquals('Status 299 - Peace', $response->getBody());
     }
 
-    public function testGetMethod()
-    {
-        $client = new SimpleRequestClient();
-        $response = $client->get('http://localhost/method');
-
-        $this->assertEquals('GET', $response->getBody());
-    }
-
     public function testGetRedirect()
     {
         $client = new SimpleRequestClient();
@@ -135,16 +127,6 @@ class SimpleTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('plain.txt, 8', $response->getBody());
-    }
-
-    public function testCookieParams()
-    {
-        $requestClient = new SimpleRequestClient();
-        $requestClient->setCookies(['token' => 'slim', 'session' => 'foo-bar']);
-
-        $response = $requestClient->get('http://localhost/cookie-params');
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('{"token":"slim","session":"foo-bar"}', $response->getBody());
     }
 
     // `\Psr\Http\Message\MessageInterface::withProtocolVersion()`
@@ -238,6 +220,18 @@ class SimpleTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('http', $response->getBody());
+    }
+
+    public function testCookieParams()
+    {
+        // The request handler on the server is using the following methods (which we test here):
+        // `\Psr\Http\Message\ServerRequestInterface::getCookieParams()`
+        $requestClient = new SimpleRequestClient();
+        $requestClient->setCookies(['token' => 'slim', 'session' => 'foo-bar']);
+
+        $response = $requestClient->get('http://localhost/request/cookie-params');
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('{"token":"slim","session":"foo-bar"}', $response->getBody());
     }
 
     public function testAttributes()

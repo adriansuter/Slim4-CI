@@ -57,11 +57,6 @@ $app->get('/status-reason-phrase', function (Request $request, Response $respons
     return $response;
 });
 
-$app->get('/method', function (Request $request, Response $response, $args) {
-    $response->getBody()->write($request->getMethod());
-    return $response;
-});
-
 $app->get('/redirect', function (Request $request, Response $response, $args) {
     return $response
         ->withHeader('Location', '/redirected')
@@ -91,12 +86,6 @@ $app->post('/upload-file', function (Request $request, Response $response, $args
     return $response;
 });
 
-$app->get('/cookie-params', function (Request $request, Response $response, array $args): Response {
-    $response->getBody()->write(
-        json_encode($request->getCookieParams(), JSON_UNESCAPED_UNICODE)
-    );
-    return $response;
-});
 
 $app->group('/request', function (RouteCollectorProxy $group) {
     $group->get('/protocol-version', function (Request $request, Response $response, array $args): Response {
@@ -205,6 +194,14 @@ $app->group('/request', function (RouteCollectorProxy $group) {
         $serverParams = $request->getServerParams();
         $response->getBody()->write(
             isset($serverParams['REQUEST_SCHEME']) ? $serverParams['REQUEST_SCHEME'] : '-'
+        );
+
+        return $response;
+    });
+
+    $group->get('/cookie-params', function (Request $request, Response $response, array $args): Response {
+        $response->getBody()->write(
+            json_encode($request->getCookieParams(), JSON_UNESCAPED_UNICODE)
         );
 
         return $response;
