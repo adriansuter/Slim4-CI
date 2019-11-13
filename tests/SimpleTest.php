@@ -188,7 +188,7 @@ class SimpleTest extends TestCase
         // TODO Add some headers into the request.
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('["1234"]["5678"]5678, 8765["5678","8765"]NO', $response->getBody());
+        $this->assertEquals('["1234"]["5678"]5678,8765["5678","8765"]NO', $response->getBody());
     }
 
     public function testAttributes()

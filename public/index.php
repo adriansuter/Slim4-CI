@@ -135,9 +135,11 @@ $app->group('/request', function (RouteCollectorProxy $group) {
 
         $request = $request->withHeader('test', '5678');
         $response->getBody()->write(
+        /** @var Request $request */
             json_encode($request->getHeader('test'), JSON_UNESCAPED_UNICODE)
         );
 
+        /** @var Request $request */
         $request = $request->withAddedHeader('test', '8765');
         $response->getBody()->write(
         /** @var Request $request */
