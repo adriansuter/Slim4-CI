@@ -193,6 +193,17 @@ class SimpleTest extends TestCase
         $this->assertEquals('["9"]["1234"]["5678"]5678,8765["5678","8765"]NO', $response->getBody());
     }
 
+    // `\Psr\Http\Message\MessageInterface::getBody()`
+    // `\Psr\Http\Message\MessageInterface::withBody()`
+    public function testRequestBody()
+    {
+        $requestClient = new SimpleRequestClient();
+        $response = $requestClient->post('http://localhost/request/body', ['foo' => 'bar']);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('foo=bar,test', $response->getBody());
+    }
+
     public function testAttributes()
     {
         // The request handler on the server is using the following methods (which we test here):

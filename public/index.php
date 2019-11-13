@@ -7,6 +7,7 @@
 
 declare(strict_types=1);
 
+use App\Utils\SlimPsr17FactoryUtils;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\UploadedFileInterface;
@@ -160,6 +161,20 @@ $app->group('/request', function (RouteCollectorProxy $group) {
         $request = $request->withoutHeader('test');
         $response->getBody()->write(
             $request->hasHeader('test') ? 'YES' : 'NO'
+        );
+
+        return $response;
+    });
+
+    $group->post('/body', function (Request $request, Response $response, array $args): Response {
+        $response->getBody()->write(
+            $request->getBody()->getContents()
+        );
+
+        $streamFactory = SlimPsr17FactoryUtils::getStreamFactory();
+        $request = $request->withBody($streamFactory->createStream('test'));
+        $response->getBody()->write(
+            ',' . $request->getBody()->getContents()
         );
 
         return $response;
