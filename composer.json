@@ -9,12 +9,13 @@
     }
   ],
   "require": {
+    "php": "^7.2",
     "ext-json": "*",
     "slim/slim": "^4.0"
   },
   "require-dev": {
     "ext-curl": "*",
-    "phpunit/phpunit": "^7.5",
+    "phpunit/phpunit": "^8.0",
     "robtimus/multipart": "1.*"
   },
   "autoload": {
