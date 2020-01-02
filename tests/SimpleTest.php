@@ -29,7 +29,7 @@ class SimpleTest extends TestCase
             'Slim' => 'Slim\Psr7\Request, Slim\Psr7\Response',
             'Nyholm' => 'Nyholm\Psr7\ServerRequest, Nyholm\Psr7\Response',
             'Guzzle' => 'GuzzleHttp\Psr7\ServerRequest, GuzzleHttp\Psr7\Response',
-            'Laminas' => 'Zend\Diactoros\ServerRequest, Zend\Diactoros\Response',
+            'Laminas' => 'Laminas\Diactoros\ServerRequest, Laminas\Diactoros\Response',
             'Zend' => 'Zend\Diactoros\ServerRequest, Zend\Diactoros\Response',
         ];
 
