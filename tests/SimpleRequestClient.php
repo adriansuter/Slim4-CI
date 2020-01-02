@@ -12,8 +12,18 @@ namespace Slim\Tests\CI;
 use Robtimus\Multipart\MultipartFormData;
 use RuntimeException;
 
-class SimpleClient
+class SimpleRequestClient
 {
+    /**
+     * @var string[]
+     */
+    private $headers = [];
+
+    /**
+     * @var string[]
+     */
+    private $cookies = [];
+
     /**
      * @param string $url
      * @param SimpleResponse $response
@@ -31,26 +41,43 @@ class SimpleClient
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($curl, CURLOPT_MAXREDIRS, 9);
+
+        if (!empty($this->headers)) {
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $this->headers);
+        }
+
+        if (!empty($this->cookies)) {
+            $cookieValue = '';
+            foreach ($this->cookies as $key => $value) {
+                if (!empty($cookieValue)) {
+                    $cookieValue .= '; ';
+                }
+
+                $cookieValue .= $key . '=' . $value;
+            }
+            curl_setopt($curl, CURLOPT_COOKIE, $cookieValue);
+        }
+
         curl_setopt($curl, CURLOPT_HEADERFUNCTION,
             function ($curl, $header) use ($response) {
-                $len = strlen($header);
+                $length = strlen($header);
                 if (preg_match('_^(HTTP/.+) (\d+) (.+)$_', trim($header), $m)) {
                     $response->setStatusProtocol($m[1]);
                     $response->setStatusCode(intval($m[2]));
                     $response->setStatusReasonPhrase($m[3]);
 
-                    return $len;
+                    return $length;
                 }
 
                 $header = explode(':', $header, 2);
                 if (count($header) < 2) // ignore invalid headers
                 {
-                    return $len;
+                    return $length;
                 }
 
                 $response->addHeader(strtolower(trim($header[0])), trim($header[1]));
 
-                return $len;
+                return $length;
             }
         );
 
@@ -72,6 +99,22 @@ class SimpleClient
         curl_close($curl);
 
         return $response;
+    }
+
+    /**
+     * @param array $headers
+     */
+    public function setHeaders(array $headers): void
+    {
+        $this->headers = $headers;
+    }
+
+    /**
+     * @param array $cookies
+     */
+    public function setCookies(array $cookies): void
+    {
+        $this->cookies = $cookies;
     }
 
     /**
@@ -111,6 +154,8 @@ class SimpleClient
     }
 
     /**
+     * Send a POST request containing multipart form data to the server
+     *
      * @param string $url
      * @param MultipartFormData $multipart
      *
@@ -122,16 +167,14 @@ class SimpleClient
             $multipart->finish();
         }
 
-        $response = new SimpleResponse();
-
-        $curl = $this->curlInit($url, $response);
-
-        $headers = ['Content-Type: ' . $multipart->getContentType()];
+        array_push($this->headers, 'Content-Type: ' . $multipart->getContentType());
         $contentLength = $multipart->getContentLength();
         if ($contentLength >= 0) {
-            $headers[] = 'Content-Length: ' . $contentLength;
+            array_push($this->headers, 'Content-Length: ' . $contentLength);
         }
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+        $response = new SimpleResponse();
+        $curl = $this->curlInit($url, $response);
 
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $multipart->buffer(

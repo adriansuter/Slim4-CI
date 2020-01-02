@@ -3,16 +3,18 @@ language: php
 sudo: false
 
 php:
-  - "7.1.32"
+  - "7.2.25"
 
 env:
   - PSR7="Slim"
   - PSR7="Nyholm"
   - PSR7="Guzzle"
+  - PSR7="Laminas"
   - PSR7="Zend"
   - SLIM_DEV=true PSR7="Slim"
   - SLIM_DEV=true PSR7="Nyholm"
   - SLIM_DEV=true PSR7="Guzzle"
+  - SLIM_DEV=true PSR7="Laminas"
   - SLIM_DEV=true PSR7="Zend"
 
 matrix:
@@ -20,6 +22,7 @@ matrix:
     - env: SLIM_DEV=true PSR7="Slim"
     - env: SLIM_DEV=true PSR7="Nyholm"
     - env: SLIM_DEV=true PSR7="Guzzle"
+    - env: SLIM_DEV=true PSR7="Laminas"
     - env: SLIM_DEV=true PSR7="Zend"
 
 before_install:
@@ -31,6 +34,7 @@ install:
   - if [[ "$PSR7" == 'Slim'   ]]; then travis_retry composer require slim/psr7 ; fi
   - if [[ "$PSR7" == 'Nyholm' ]]; then travis_retry composer require nyholm/psr7 nyholm/psr7-server ; fi
   - if [[ "$PSR7" == 'Guzzle' ]]; then travis_retry composer require guzzlehttp/psr7 http-interop/http-factory-guzzle ; fi
+  - if [[ "$PSR7" == 'Laminas'   ]]; then travis_retry composer require laminas/laminas-diactoros ; fi
   - if [[ "$PSR7" == 'Zend'   ]]; then travis_retry composer require zendframework/zend-diactoros ; fi
 
 before_script:

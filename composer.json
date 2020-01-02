@@ -9,13 +9,19 @@
     }
   ],
   "require": {
+    "php": "^7.2",
     "ext-json": "*",
     "slim/slim": "^4.0"
   },
   "require-dev": {
     "ext-curl": "*",
-    "phpunit/phpunit": "^7.5",
+    "phpunit/phpunit": "^8.5",
     "robtimus/multipart": "1.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/App"
+    }
   },
   "autoload-dev": {
     "psr-4": {
