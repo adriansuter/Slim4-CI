@@ -15,7 +15,7 @@ framework.
 | 2   | Nyholm               | [![Nyholm](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/2)](https://travis-ci.org/adriansuter/Slim4-CI)  |
 | 3   | Guzzle               | [![Guzzle](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/3)](https://travis-ci.org/adriansuter/Slim4-CI)  |
 | 4   | Laminas              | [![Laminas](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/4)](https://travis-ci.org/adriansuter/Slim4-CI) |
-| 5   | Zend                 | [![Zend](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/5)](https://travis-ci.org/adriansuter/Slim4-CI)    |
+| 5   | Zend (deprecated)    | [![Zend](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/5)](https://travis-ci.org/adriansuter/Slim4-CI)    |
 
 *Note: Travis-CI is configured to be triggered automatically at least every 24 hours.*
 
@@ -29,7 +29,7 @@ The following status used the development branch of Slim (4.x) to test against.
 | 7   | Nyholm               | [![Nyholm](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/7)](https://travis-ci.org/adriansuter/Slim4-CI)  |
 | 8   | Guzzle               | [![Guzzle](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/8)](https://travis-ci.org/adriansuter/Slim4-CI)  |
 | 9   | Laminas              | [![Laminas](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/9)](https://travis-ci.org/adriansuter/Slim4-CI) |
-| 10  | Zend                 | [![Zend](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/10)](https://travis-ci.org/adriansuter/Slim4-CI)   |
+| 10  | Zend (deprecated)    | [![Zend](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/10)](https://travis-ci.org/adriansuter/Slim4-CI)   |
 
 *Note: Travis-CI is configured to be triggered automatically at least every 24 hours.*
 
