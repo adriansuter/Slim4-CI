@@ -9,12 +9,13 @@ framework.
 
 ## Status
 
-| #   | PSR-7 Implementation | Status                                                                                                                                           |
-| --- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 1   | Slim PSR-7           | [![Slim](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/1)](https://travis-ci.org/adriansuter/Slim4-CI)   |
-| 2   | Nyholm               | [![Nyholm](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/2)](https://travis-ci.org/adriansuter/Slim4-CI) |
-| 3   | Guzzle               | [![Guzzle](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/3)](https://travis-ci.org/adriansuter/Slim4-CI) |
-| 4   | Zend                 | [![Zend](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/4)](https://travis-ci.org/adriansuter/Slim4-CI)   |
+| #   | PSR-7 Implementation | Status                                                                                                                                            |
+| --- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Slim PSR-7           | [![Slim](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/1)](https://travis-ci.org/adriansuter/Slim4-CI)    |
+| 2   | Nyholm               | [![Nyholm](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/2)](https://travis-ci.org/adriansuter/Slim4-CI)  |
+| 3   | Guzzle               | [![Guzzle](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/3)](https://travis-ci.org/adriansuter/Slim4-CI)  |
+| 4   | Laminas              | [![Laminas](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/4)](https://travis-ci.org/adriansuter/Slim4-CI) |
+| 5   | Zend                 | [![Zend](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/5)](https://travis-ci.org/adriansuter/Slim4-CI)    |
 
 *Note: Travis-CI is configured to be triggered automatically at least every 24 hours.*
 
@@ -22,12 +23,13 @@ framework.
 
 The following status used the development branch of Slim (4.x) to test against.
 
-| #   | PSR-7 Implementation | Status                                                                                                                                           |
-| --- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 5   | Slim PSR-7           | [![Slim](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/5)](https://travis-ci.org/adriansuter/Slim4-CI)   |
-| 6   | Nyholm               | [![Nyholm](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/6)](https://travis-ci.org/adriansuter/Slim4-CI) |
-| 7   | Guzzle               | [![Guzzle](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/7)](https://travis-ci.org/adriansuter/Slim4-CI) |
-| 8   | Zend                 | [![Zend](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/8)](https://travis-ci.org/adriansuter/Slim4-CI)   |
+| #   | PSR-7 Implementation | Status                                                                                                                                            |
+| --- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 6   | Slim PSR-7           | [![Slim](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/6)](https://travis-ci.org/adriansuter/Slim4-CI)    |
+| 7   | Nyholm               | [![Nyholm](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/7)](https://travis-ci.org/adriansuter/Slim4-CI)  |
+| 8   | Guzzle               | [![Guzzle](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/8)](https://travis-ci.org/adriansuter/Slim4-CI)  |
+| 9   | Laminas              | [![Laminas](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/9)](https://travis-ci.org/adriansuter/Slim4-CI) |
+| 10  | Zend                 | [![Zend](https://travis-matrix-badges.herokuapp.com/repos/adriansuter/Slim4-CI/branches/master/10)](https://travis-ci.org/adriansuter/Slim4-CI)   |
 
 *Note: Travis-CI is configured to be triggered automatically at least every 24 hours.*
 
@@ -87,7 +89,11 @@ Help in form of issues or pull requests would be very much welcomed.
     ```bash
     $ composer require guzzlehttp/psr7 http-interop/http-factory-guzzle
     ```
-  - Zend
+  - Laminas
+    ```bash
+    $ composer require laminas/laminas-diactoros
+    ```
+  - Zend (Deprecated)
     ```bash
     $ composer require zendframework/zend-diactoros
     ```

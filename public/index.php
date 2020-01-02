@@ -141,7 +141,10 @@ $app->group('/request', function (RouteCollectorProxy $group) {
         );
 
         $streamFactory = SlimPsr17FactoryUtils::getStreamFactory();
-        $request = $request->withBody($streamFactory->createStream('test'));
+        $stream = $streamFactory->createStream('test');
+        $stream->rewind();
+
+        $request = $request->withBody($stream);
         $response->getBody()->write(
             ',' . $request->getBody()->getContents()
         );

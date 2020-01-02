@@ -156,7 +156,7 @@ class SimpleTest extends TestCase
         $response = $requestClient->get('http://localhost/request/headers');
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('["9"]["1234"]["5678"]5678,8765["5678","8765"]NO', $response->getBody());
+        $this->assertRegExp('/\["9"\]\["1234"\]\["5678"\]5678,\s?8765\["5678","8765"\]NO/', $response->getBody());
     }
 
     // `\Psr\Http\Message\MessageInterface::getBody()`
