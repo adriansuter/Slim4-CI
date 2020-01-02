@@ -15,7 +15,7 @@
   },
   "require-dev": {
     "ext-curl": "*",
-    "phpunit/phpunit": "^8.0",
+    "phpunit/phpunit": "^8.5",
     "robtimus/multipart": "1.*"
   },
   "autoload": {
