@@ -11,7 +11,7 @@
   "require": {
     "php": "^7.2",
     "ext-json": "*",
-    "slim/slim": "^4.0"
+    "slim/slim": "^4.5"
   },
   "require-dev": {
     "ext-curl": "*",
